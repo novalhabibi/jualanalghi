@@ -1,2 +1,2 @@
 # jualanalghi
-# jualanalghi
+

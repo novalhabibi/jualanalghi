@@ -27,7 +27,8 @@ if(isset($id_member)){
           $dataproduk=$koneksi->query("SELECT *FROM produk WHERE id_produk='$dataKeranjang[id_produk]'");
           $produk=$dataproduk->fetch_assoc();
             $koneksi->query("INSERT into detail_transaksi() 
-              values('$queryTransaksi[id_transaksi]', '$dataKeranjang[id_produk]','$produk[harga_produk]' ,'$dataKeranjang[jumlah]')") or die("gagal detail!!".mysqli_error($koneksi));
+              values('$queryTransaksi[id_transaksi]', '$dataKeranjang[id_produk]','$produk[harga_produk]' ,'$dataKeranjang[jumlah]')") or die("gagal detail disini !!".mysqli_error($koneksi));
+            
           }
           $hapusKeranjang = $koneksi->query("DELETE from keranjang where id_member = '$id_member'") or die("gagal hapusKeranjang!!".mysqli_error($koneksi));
           if($hapusKeranjang)echo "<script>

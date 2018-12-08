@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Mar 13, 2018 at 09:05 PM
--- Server version: 5.7.21-0ubuntu0.17.10.1
--- PHP Version: 7.1.11-0ubuntu0.17.10.1
+-- Host: 127.0.0.1
+-- Generation Time: Dec 08, 2018 at 03:04 PM
+-- Server version: 10.1.8-MariaDB
+-- PHP Version: 5.6.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `detail_transaksi` (
   `id_transaksi` int(11) NOT NULL,
   `id_produk` int(11) NOT NULL,
+  `harga_produk` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -36,13 +37,9 @@ CREATE TABLE `detail_transaksi` (
 -- Dumping data for table `detail_transaksi`
 --
 
-INSERT INTO `detail_transaksi` (`id_transaksi`, `id_produk`, `jumlah`) VALUES
-(1, 1, 2),
-(1, 2, 3),
-(2, 1, 2),
-(3, 1, 1),
-(4, 1, 1),
-(5, 2, 1);
+INSERT INTO `detail_transaksi` (`id_transaksi`, `id_produk`, `harga_produk`, `jumlah`) VALUES
+(9, 2, 200000, 2),
+(9, 1, 300000, 2);
 
 -- --------------------------------------------------------
 
@@ -93,12 +90,7 @@ CREATE TABLE `konfirmasi` (
 --
 
 INSERT INTO `konfirmasi` (`id_transaksi`, `bukti`) VALUES
-(4, 'Screenshot-from-2018-03-01-19-01-19.png'),
-(4, 'Screenshot-from-2018-02-26-07:53:55.png'),
-(4, 'Screenshot-from-2018-02-26-07:53:55.png'),
-(3, 'Screenshot-from-2018-03-01-19-01-19.png'),
-(1, 'Screenshot-from-2018-03-08-02-52-08.png'),
-(5, 'Screenshot-from-2018-03-08-09-54-31.png');
+(9, '16-Bukti-Transfer-Bapak-Lewi.JPG');
 
 -- --------------------------------------------------------
 
@@ -123,7 +115,8 @@ INSERT INTO `member` (`id_member`, `nama_member`, `password_member`, `email_memb
 (2, 'Noval Habibi', '467bae90b19ee6eb379a749cb924f726', 'noval@gmail.com', '086714214', '2018-03-04'),
 (3, 'Alghi', '202cb962ac59075b964b07152d234b70', 'algi@gmail.com', '1111111', '2018-03-07'),
 (4, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '2018-03-13'),
-(5, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '2018-03-13');
+(5, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', '2018-03-13'),
+(6, 'member 1', 'c7764cfed23c5ca3bb393308a0da2306', 'member1@gmail.com', '34567', '2018-12-08');
 
 -- --------------------------------------------------------
 
@@ -161,6 +154,7 @@ CREATE TABLE `produk` (
   `foto_produk` varchar(100) NOT NULL,
   `size_produk` int(11) NOT NULL,
   `merk` varchar(30) NOT NULL,
+  `stok_produk` int(11) NOT NULL,
   `tgl_input` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -168,9 +162,9 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `id_kategori`, `ringkasan_produk`, `deskripsi_produk`, `harga_produk`, `foto_produk`, `size_produk`, `merk`, `tgl_input`) VALUES
-(1, 'Ecosole', 1, 'Ini sepatu bagus', 'akhdajkdbasnsaofsmnxzncss sks', 300000, 'IMG-20180227-WA0009.jpg', 21, 'Adidas', '2018-03-04'),
-(2, 'Adidas MEn', 2, 'ini sepati adidas', 'kjfbkjbvnv bvfwegvEgerg\r\nergerg\r\ner\r\nge\r\ng\r\ne\r\ng\r\nerrgerger\r\nergeg', 200000, 'IMG_20180227_091547.jpg', 30, 'Adidas', '2018-03-07');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `id_kategori`, `ringkasan_produk`, `deskripsi_produk`, `harga_produk`, `foto_produk`, `size_produk`, `merk`, `stok_produk`, `tgl_input`) VALUES
+(1, 'Ecosole', 1, 'Ini sepatu bagus', 'akhdajkdbasnsaofsmnxzncss sks', 300000, 'IMG-20180227-WA0009.jpg', 21, 'Adidas', 5, '2018-03-04'),
+(2, 'Adidas MEn', 2, 'ini sepati adidas', 'kjfbkjbvnv bvfwegvEgerg\r\nergerg\r\ner\r\nge\r\ng\r\ne\r\ng\r\nerrgerger\r\nergeg', 200000, 'IMG_20180227_091547.jpg', 30, 'Adidas', 7, '2018-03-07');
 
 -- --------------------------------------------------------
 
@@ -193,11 +187,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_member`, `alamat_kirim`, `total_bayar`, `tanggal`, `id_ongkir`, `status`) VALUES
-(1, 2, 'Rangkas kencana', 1200000, '2018-03-08', 0, 'sudah konfirmasi'),
-(2, 2, 'Rangkkkanananna', 600000, '2018-03-08', 0, 'pesan'),
-(3, 2, 'wfrwefwgwfwefwe', 300000, '2018-03-08', 0, 'sudah konfirmasi'),
-(4, 2, 'bbbbbbbb', 300000, '2018-03-08', 0, 'sudah konfirmasi'),
-(5, 2, 'wdwdwdwdwd', 200000, '2018-03-08', 2, 'sudah konfirmasi');
+(9, 6, 'shrh', 1020000, '2018-12-08', 1, 'sudah konfirmasi');
 
 --
 -- Indexes for dumped tables
@@ -246,7 +236,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
-  MODIFY `id_member` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_member` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ongkir`
 --
@@ -261,7 +251,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

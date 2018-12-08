@@ -4,6 +4,14 @@ include "inc/koneksi.php";
 
 //echo $id_member;
 //echo $id_produk;
+
+// if (isset($_GET['id_produk'])) {
+//   $id_produk=$_GET['id_produk'];
+// }else{
+//   $id_produk="";
+// }
+
+
 if(isset($_SESSION['member']['id_member'])){
 $id_member=$_SESSION['member']['id_member'];
 $cek= $koneksi->query("SELECT * from keranjang where id_member = '$id_member'");
@@ -22,6 +30,7 @@ $id_member=$_SESSION['member']['id_member'];
               $koneksi->query("INSERT into keranjang() values('$id_member', '$id_produk', 1)") or die("gagal mas bro!".mysqli_error($koneksi));
             else
               $koneksi->query("UPDATE keranjang set jumlah = jumlah + 1 where id_member = '$id_member' and id_produk = '$id_produk'") or die("gagal mas bro!".mysqli_error($koneksi));
+            
               echo "<script>
               location='keranjang.php';
               </script>";
@@ -119,7 +128,7 @@ $id_member=$_SESSION['member']['id_member'];
           
 
           <!-- tambah produk -->
-          <!-- <a href='keranjang.php?aksi=tambah&id_produk=<?php echo $produk['id_produk']; ?>'><i class="glyphicon glyphicon-plus"></i></a> -->
+          <!-- <a href='keranjang.php?aksi=tambah&id_produk=<?php //echo $produk['id_produk']; ?>'><i class="glyphicon glyphicon-plus"></i></a> -->
           <?php 
           //Cek ke Stok
              
